@@ -1,0 +1,32 @@
+import pygame as pg
+
+class CrearRectangulo():
+    def __init__(self, fin, pantalla, color, posx, posy, tamañox, tamañoy, saltox, saltoy):
+        self.finJuego = fin
+        self.pantalla = pantalla
+        self.color = color
+        self.x = posx
+        self.y = posy
+        self.ancho = tamañox
+        self.alto = tamañoy
+        self.velocidadx = saltox
+        self.velocidady = saltoy
+    
+    def dibujarRectangulo(self):
+        
+        while not self.finJuego:
+
+            if (self.x + self.saltox + self.ancho) >= pg.self.pantalla.get_surface().get_width() or (self.x + self.saltox) <= 0:
+                self.saltox *= -1
+                self.x += self.saltox
+            else:
+                self.x += self.saltox
+            if (self.y + self.saltoy + self.alto) >= pg.self.pantalla.get_surface().get_height() or self.y <= 0:
+                self.saltoy *= -1
+                self.y += self.saltoy
+            else:
+                self.y += self.saltoy
+            
+            self.pantalla.fill( (52,152,219) ) #Asignar color a la pantalla con formato de color RGB
+            pg.draw.rect(self.pantalla,self.color,(self.x,self.y,self.ancho,self.alto)) #Se agrega rectángulo a la pantalla y los parámetros entregados son pantalla, color, ubicación y tamaño (ancho ubicación, alto uubicación, ancho tamaño, alto tamaño)
+            pg.display.flip() #Método que añade a la pantalla los recursos que se van incluyendo
